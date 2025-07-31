@@ -35,16 +35,20 @@
                     "value": "true"
                 },
                 {
-                    "name": "traefik.http.services.baserow.loadbalancer.server.port",
+                    "name": "traefik.http.services.${servicenameid}.loadbalancer.server.port",
                     "value": "80"
                 },
                 {
-                    "name": "traefik.http.routers.baserow.entrypoints",
-                    "value": "websecure"
+                    "name": "traefik.http.routers.${servicenameid}.entrypoints",
+                    "value": "web"
                 },
                 {
-                    "name": "traefik.http.routers.baserow.tls.certresolver",
-                    "value": "mydnschallenge"
+                    "traefik.http.routers.${servicenameid}.rule=",
+                    "value": "Host(`${DOMAIN}`)"
+                },
+                {
+                    "name": "traefik.http.routers.${servicenameid}.middlewares",
+                    "value": "${ALLOWED_IPS:+ipfilter@file}"
                 }
             ],
             "maintainer": " https://github.com/mediadepot/templates/"
