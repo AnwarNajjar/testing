@@ -43,7 +43,7 @@
                     "value": "web"
                 },
                 {
-                    "name": "traefik.http.routers.${servicenameid}.rule",
+                    " name": "traefik.http.routers.${servicenameid}.rule=",
                     "value": "Host(`${DOMAIN}`)"
                 },
                 {
