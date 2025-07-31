@@ -1,0 +1,53 @@
+{
+    "version": "3",
+    "templates": [
+        {
+            "id": 1,
+            "type": 1,
+            "name": "baserow",
+            "title": "Baserow",
+            "description": " Open source no-code database and Airtable alternative ",
+            "logo": "https://mediadepot.github.io/templates/img/baserow.png",
+            "image": "baserow/baserow:1.22.3",
+            "categories": [
+                "Downloaders",
+                "Tools"
+            ],
+            "ports": [
+                "80/tcp"
+            ],
+            "volumes": [
+                {
+                    "container": "/baserow/data",
+                    "bind": "/opt/mediadepot/apps/baserow"
+                }
+            ],
+            "env": [
+                {
+                    "name": "BASEROW_PUBLIC_URL",
+                    "label": "BASEROW_PUBLIC_URL",
+                    "preset": false
+                }
+            ],
+            "labels": [
+                {
+                    "name": "traefik.enable",
+                    "value": "true"
+                },
+                {
+                    "name": "traefik.http.services.baserow.loadbalancer.server.port",
+                    "value": "80"
+                },
+                {
+                    "name": "traefik.http.routers.baserow.entrypoints",
+                    "value": "websecure"
+                },
+                {
+                    "name": "traefik.http.routers.baserow.tls.certresolver",
+                    "value": "mydnschallenge"
+                }
+            ],
+            "maintainer": " https://github.com/mediadepot/templates/"
+        }
+    ]
+}
