@@ -52,6 +52,64 @@
                 }
             ],
             "maintainer": " https://github.com/mediadepot/templates/"
+        },
+        {
+            "id": 2,
+            "type": 1,
+            "name": "cardigann",
+            "title": "Cardigann",
+            "description": "Cardigann, a server for adding extra indexers to Sonarr, SickRage and CouchPotato via Torznab and TorrentPotato proxies. Behind the scenes Cardigann logs in and runs searches and then transforms the results into a compatible format.",
+            "logo": "https://mediadepot.github.io/templates/img/cardigann.png",
+            "image": "linuxserver/cardigann:latest",
+            "categories": [
+                "Downloaders"
+            ],
+            "ports": [
+                "5060/tcp"
+            ],
+            "volumes": [
+                {
+                    "container": "/config",
+                    "bind": "/opt/mediadepot/apps/cardigann"
+                }
+            ],
+            "env": [
+                {
+                    "name": "PGID",
+                    "label": "PGID",
+                    "default": "15000",
+                    "preset": true
+                },
+                {
+                    "name": "PUID",
+                    "label": "PUID",
+                    "default": "15000",
+                    "preset": true
+                }
+            ],
+            "labels": [
+                {
+                    "name": "traefik.enable",
+                    "value": "true"
+                },
+                {
+                    "name": "traefik.http.services.${servicenameid}.loadbalancer.server.port",
+                    "value": "80"
+                },
+                {
+                    "name": "traefik.http.routers.${servicenameid}.entrypoints",
+                    "value": "web"
+                },
+                {
+                    " name": "traefik.http.routers.${servicenameid}.rule=",
+                    "value": "Host(`${DOMAIN}`)"
+                },
+                {
+                    "name": "traefik.http.routers.${servicenameid}.middlewares",
+                    "value": "${ALLOWED_IPS:+ipfilter@file}"
+                }
+            ],
+            "maintainer": " https://github.com/mediadepot/templates/"
         }
     ]
 }
